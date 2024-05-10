@@ -6,7 +6,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/post" element={<PostBox />} />
+        <Route path="/" element={<PostBox />} />
       </Routes>
     </Router>
   );

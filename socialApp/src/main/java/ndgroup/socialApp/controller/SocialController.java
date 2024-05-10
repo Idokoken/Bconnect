@@ -11,9 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
+@CrossOrigin("*")
 public class SocialController {
     @Autowired
     private PostService postService;
+
 
     @GetMapping
     public ResponseEntity<?> getAllPosts() {

@@ -3,7 +3,6 @@
 Welcome to Bconnect!
 
 ## Overview
-
 Bconnect is a social networking platform designed to connect people, share ideas, and build communities.
 
 ## Features
