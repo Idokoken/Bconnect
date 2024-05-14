@@ -27,5 +27,20 @@ public class SocialController {
         Post newPost =  postService.createPost(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(newPost);
     }
+    @PutMapping("/likes/{id}/{like}")
+    public ResponseEntity<?>updateLikes(@PathVariable Integer id, @PathVariable Integer like){
+       Post post  = postService.updatePostLikes(id, like);
+        return ResponseEntity.status(HttpStatus.CREATED).body(post);
+    }
+    @PutMapping("/unlikes/{id}/{unlike}")
+    public ResponseEntity<?>updateUnLikes(@PathVariable Integer id, @PathVariable Integer unlike){
+        Post post  = postService.updatePostUnLikes(id, unlike);
+        return ResponseEntity.status(HttpStatus.CREATED).body(post);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delStudent(@PathVariable Integer id) {
+        postService.deletePost(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

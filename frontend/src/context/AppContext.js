@@ -13,8 +13,6 @@ export const initialState = {
 export const AppContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(Reducer, initialState);
 
-
-
     return (
         <AppContext.Provider value={{
             state,

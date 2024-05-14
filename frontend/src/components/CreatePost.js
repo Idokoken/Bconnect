@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import axios from "axios";
+import { BASE_URL } from "../API";
+import { useAppContext } from '../context/AppContext'
+import { POST_DATA_FAILURE, POST_DATA_REQUEST, POST_DATA_SUCCESS } from '../context/action'
 
 const Wrapper = styled.div`
 
@@ -29,17 +33,34 @@ form{
 `
 
 function CreatePost() {
-    const [values, setValues] = useState({ user: "", content: "" })
+    const initialDetails = { user: "", content: "" }
+    const [values, setValues] = useState(initialDetails)
+    const { dispatch } = useAppContext()
+
+    const postData = async (post) => {
+        dispatch({ type: POST_DATA_REQUEST });
+        try {
+            const response = await axios.post(BASE_URL + '/posts', post);
+            console.log(response)
+            dispatch({ type: POST_DATA_SUCCESS, payload: response.data });
+        } catch (error) {
+            dispatch({ type: POST_DATA_FAILURE, payload: error.message });
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(values)
-        setValues({ values: '' })
+        const { user, content } = values
+        const details = { user, content }
+        postData(details)
+
+        setValues(initialDetails)
     }
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValues({ ...values, [name]: value });
     }
+
 
     return (
         <Wrapper>
